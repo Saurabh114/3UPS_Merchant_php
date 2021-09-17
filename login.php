@@ -1,3 +1,9 @@
+<?
+session_start();
+if (isset($_SESSION['merchant_id'])) {
+    header("Location: ./index.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,6 +28,11 @@
     <!-- Template CSS -->
     <link rel="stylesheet" href="assets/css/style.min.css">
     <link rel="stylesheet" href="assets/css/components.min.css">
+    <link rel="stylesheet" href="./assets/modules/jquery-ui">
+    <link rel="stylesheet" href="./assets/modules/jquery-pwstrength">
+    <link rel="stylesheet" href="./assets/modules/jquery.sparkline.min.js">
+    <!-- alert -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 
 <body class="layout-4">
@@ -44,53 +55,54 @@
                             <div class="card-body">
                                 <div class="tab-content" id="myTabContent2">
                                     <div class="tab-pane fade " id="home3" role="tabpanel" aria-labelledby="home-tab3">
-                                        <form method="POST" action="#" class="needs-validation" novalidate="">
-                                            <div class="form-group">
-                                                <label for="email">Email</label>
-                                                <input id="email" type="email" class="form-control" name="email" tabindex="1" required autofocus>
-                                                <div class="invalid-feedback">
-                                                    Please fill in your email
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="d-block">
-                                                    <label for="password" class="control-label">Password</label>
-                                                    <div class="float-right">
-                                                        <a href="forgot-password.php" class="text-small">
-                                                            Forgot Password?
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                                <div class="input-group">
-                                                    <input id="myPassword" type="password" class="form-control phone-number" name="password" tabindex="2" required>
+                                     
+                                            <form method="POST" class="needs-validation" novalidate="" id="login">
+                                                <div class="form-group">
+                                                    <label for="email">Email</label>
+                                                    <input id="email" type="email" class="form-control" name="email" tabindex="1" required autofocus>
                                                     <div class="invalid-feedback">
-                                                        Please fill in your password
+                                                        Please fill in your email
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" name="remember" class="custom-control-input" tabindex="3" id="remember-me" onclick="myFunction()">
-                                                    <label class="custom-control-label" for="remember-me">Show Password</label>
+                                                <div class="form-group">
+                                                    <div class="d-block">
+                                                        <label for="password" class="control-label">Password</label>
+                                                        <div class="float-right">
+                                                            <a href="forgot-password.php" class="text-small">
+                                                                Forgot Password?
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="input-group">
+                                                        <input id="myPassword" type="password" class="form-control phone-number" name="password" tabindex="2" required>
+                                                        <div class="invalid-feedback">
+                                                            Please fill in your password
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
-                                                    Login
-                                                </button>
-                                            </div>
-                                        </form>
+                                                <div class="form-group">
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" name="remember" class="custom-control-input" tabindex="3" id="remember-me" onclick="myFunction()">
+                                                        <label class="custom-control-label" for="remember-me">Show Password</label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
+                                                        Login
+                                                    </button>
+                                                </div>
+                                            </form>
                                     </div>
                                     <div class="tab-pane fade show active" id="profile3" role="tabpanel" aria-labelledby="profile-tab3">
                                         <form method="POST" action="#" class="needs-validation" novalidate="">
                                             <div class="form-group">
                                                 <label for="email">Email / Phone No</label>
                                                 <div class="input-group">
-                                                    <input id="email" type="email" class="form-control" name="email" tabindex="1" required autofocus>
+
+                                                    <input id="user_input" type="email" class="form-control" name="email" tabindex="1" required autofocus placeholder="Enter Email or Phone">
                                                     <div class="input-group-prepend">
-                                                        <div class="input-group-text btn">
-                                                            Send OTP
-                                                        </div>
+                                                        <button type="button" onclick="getOTP()" class="input-group-text btn btn-outline-primary">
+                                                            Send OTP</button>
                                                     </div>
                                                 </div>
                                                 <div class="invalid-feedback">
@@ -102,14 +114,14 @@
                                                     <label for="password" class="control-label">OTP</label>
                                                 </div>
                                                 <div class="input-group">
-                                                    <input id="otp" type="text" class="form-control phone-number" name="password" minlength="6" maxlength="6" pattern="[0-9]{6}" tabindex="2" required>
+                                                    <input id="otp" type="text" class="form-control phone-number" name="password" minlength="6" maxlength="6" pattern="[0-9]{6}" tabindex="2" required placeholder="Enter OTP">
                                                     <div class="invalid-feedback">
                                                         Please Enter Valid OTP
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
+                                                <button type="button" onclick="LoginOTP()" class="btn btn-primary btn-lg btn-block" tabindex="4">
                                                     Login
                                                 </button>
                                             </div>
@@ -149,9 +161,91 @@
 
     <!-- JS Libraies -->
 
-    <!-- Page Specific JS File -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+    <!-- Page Specific JS File -->
+    <script>
+       
+
+
+        // get OTP
+
+        function getOTP() {
+            var user_res = jQuery('#user_input').val();
+            var request = true;
+            var is_error = "";
+            if (user_res == "") {
+                swal({
+                    title: "Please enter valid details",
+                    icon: "warning",
+                });
+                // alert("enter data")
+            } else {
+                const otp = true;
+                jQuery.ajax({
+                    url: './backend/script.php',
+                    type: 'POST',
+                    data: 'user=' + user_res + '&type_otp=' + otp,
+                    success: function(result) {
+
+                        //   alert(result)
+                        if (result === "true") {
+                            swal({
+                                title: "OTP has been sent to " + user_res,
+                                icon: "success",
+                            })
+                        } else {
+                            swal({
+                                title: "Invalid datails",
+                                icon: "warning",
+                            })
+                        }
+
+                    }
+
+                });
+            }
+        }
+
+
+        // Login with password
+
+        $('#login').on('submit', function(e) {
+            const data = "";
+            e.preventDefault();
+
+            // loader();
+            $.ajax({
+                url: './backend/script.php',
+                type: 'POST',
+                // dataType: 'json',
+                data: {
+                    type: "login",
+                    mail: $('#email').val(),
+                    pass: $('#myPassword').val()
+                },
+                success: function(data) {
+                    console.log(data);
+                    swal({
+                        title: "Login successfull",
+                        icon: "success",
+                    }).then(function() {
+                        window.location.href = "./index.php";
+                    });
+                },
+
+                error: function(response) {
+                    console.log("Error")
+                    console.log(response);
+                }
+            });
+
+            return false;
+
+        });
+    </script>
     <!-- Template JS File -->
+    <!-- <script src="./js/connections/login.js"></script> -->
     <script src="js/scripts.js"></script>
     <script src="js/custom.js"></script>
 </body>
