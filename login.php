@@ -37,13 +37,13 @@
                         <div class="card card-primary">
                             <div class="card-header">
                                 <ul class="nav nav-pills" id="myTab3" role="tablist">
-                                    <li class="nav-item"><a class="nav-link active" id="home-tab3" data-toggle="tab" href="#home3" role="tab" aria-controls="home" aria-selected="true">Login With Password</a></li>
-                                    <li class="nav-item"><a class="nav-link" id="profile-tab3" data-toggle="tab" href="#profile3" role="tab" aria-controls="profile" aria-selected="false">Login With OTP</a></li>
+                                    <li class="nav-item"><a class="nav-link active" id="profile-tab3" data-toggle="tab" href="#profile3" role="tab" aria-controls="profile" aria-selected="false">Login With OTP</a></li>
+                                    <li class="nav-item"><a class="nav-link" id="home-tab3" data-toggle="tab" href="#home3" role="tab" aria-controls="home" aria-selected="true">Login With Password</a></li>
                                 </ul>
                             </div>
                             <div class="card-body">
                                 <div class="tab-content" id="myTabContent2">
-                                    <div class="tab-pane fade show active" id="home3" role="tabpanel" aria-labelledby="home-tab3">
+                                    <div class="tab-pane fade " id="home3" role="tabpanel" aria-labelledby="home-tab3">
                                         <form method="POST" action="#" class="needs-validation" novalidate="">
                                             <div class="form-group">
                                                 <label for="email">Email</label>
@@ -81,12 +81,12 @@
                                             </div>
                                         </form>
                                     </div>
-                                    <div class="tab-pane fade" id="profile3" role="tabpanel" aria-labelledby="profile-tab3">
+                                    <div class="tab-pane fade show active" id="profile3" role="tabpanel" aria-labelledby="profile-tab3">
                                         <form method="POST" action="#" class="needs-validation" novalidate="">
                                             <div class="form-group">
                                                 <label for="email">Email / Phone No</label>
                                                 <div class="input-group">
-                                                <input id="email" type="email" class="form-control" name="email" tabindex="1" required autofocus>
+                                                    <input id="email" type="email" class="form-control" name="email" tabindex="1" required autofocus>
                                                     <div class="input-group-prepend">
                                                         <div class="input-group-text btn">
                                                             Send OTP
@@ -155,4 +155,5 @@
     <script src="js/scripts.js"></script>
     <script src="js/custom.js"></script>
 </body>
+
 </html>
