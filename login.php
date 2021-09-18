@@ -265,12 +265,26 @@ $('#login').on('submit', function(e) {
         },
         success: function(data) {
           console.log(data);
-            swal({
-              title: "Login successfull",
-              icon: "success",
-            }).then(function() {
-              window.location.href = "./index.php";
-            });
+          if(data === "true"){
+
+              swal({
+                  title: "Login successfull",
+                  icon: "success",
+                }).then(function() {
+                    window.location.href = "./index.php";
+                });
+            }  
+            else{
+                swal({
+                  title: "Invalid details",
+                  icon: "warning",
+                }).then(function() {
+                    window.location.href = "./login.php";
+                });
+            }  
+            
+                
+                
       },
       
       error: function(response) {
