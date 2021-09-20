@@ -44,7 +44,9 @@ $response_cat = curl_exec($ch);
 
     <!-- General CSS Files -->
     <link rel="stylesheet" href="assets/modules/bootstrap/css/bootstrap.min.css">
-    <!-- <link rel="stylesheet" href="assets/modules/fontawesome/css/all.min.css"> -->
+    <link rel="stylesheet" href="assets/modules/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="assets/modules/bootstrap-timepicker/css/bootstrap-timepicker.min.css">
+
 
     <!-- CSS Libraries -->
     <link rel="stylesheet" href="assets/modules/jquery-selectric/selectric.css">
@@ -197,11 +199,14 @@ $response_cat = curl_exec($ch);
                                             <input type="file" id="file_profile" class="form-control">
                                         </div>
                                         <div class="form-group col-4">
-                                        <label>Opening Time</label>
-                                        <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <div class="input-group-text">
-                                            <i class="fas fa-clock"></i>
+                                            <label>Opening Time</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text">
+                                                        <i class="fas fa-clock"></i>
+                                                    </div>
+                                                </div>
+                                                <input type="text" class="form-control timepicker">
                                             </div>
                                         </div>
                                         <input type="text" id="opening_time" class="form-control timepicker">
@@ -314,6 +319,8 @@ $response_cat = curl_exec($ch);
     <!-- JS Libraies -->
     <script src="assets/modules/jquery-pwstrength/jquery.pwstrength.min.js"></script>
     <script src="assets/modules/jquery-selectric/jquery.selectric.min.js"></script>
+    <script src="assets/modules/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
+
 
     <!-- Page Specific JS File -->
     <script src="js/page/auth-register.js"></script>
