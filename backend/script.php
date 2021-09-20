@@ -18,23 +18,32 @@ if (isset($_POST['type']) == "login") {
         }
         else{
         $res =  json_decode($response);
-        
 
-        $merchant_data = array();
-        $merchant_data = $res->data[0];
-        // print_r($merchant_data);
-        // print_r($res->data[0]);
-        
-        print_r($merchant_data->merchant_id);
-        session_start();
-        $_SESSION['merchant_id'] = $merchant_data->merchant_id;
-        $_SESSION['token'] = $res->token;
-        
-       
+        if($res->status){
+
+          $merchant_data = array();
+          $merchant_data = $res->data[0];
+          // print_r($merchant_data);
+          // print_r($res->data[0]);
+          
+          // print_r($merchant_data->merchant_id);
+          session_start();
+          $_SESSION['merchant_id'] = $merchant_data->merchant_id;
+          $_SESSION['token'] = $res->token;
+           $result=true;
+          echo json_encode($result);
+          
+        }
+        else {
+          $result=false;
+          echo json_encode($result);
+        }
         }
       }
     
 }
+
+
 else if(isset($_GET['type']) == "logout"){
   
   session_start();
