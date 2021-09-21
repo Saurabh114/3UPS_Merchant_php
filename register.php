@@ -14,7 +14,6 @@
 
     <!-- General CSS Files -->
     <link rel="stylesheet" href="assets/modules/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/modules/fontawesome/css/all.min.css">
     <link rel="stylesheet" href="assets/modules/bootstrap-timepicker/css/bootstrap-timepicker.min.css">
 
 
@@ -215,7 +214,6 @@
 
     <!-- General JS Scripts -->
     <script src="assets/bundles/lib.vendor.bundle.js"></script>
-    <script src="js/CodiePie.js"></script>
 
     <!-- JS Libraies -->
     <script src="assets/modules/jquery-pwstrength/jquery.pwstrength.min.js"></script>
@@ -230,7 +228,5 @@
     <script src="js/scripts.js"></script>
     <script src="js/custom.js"></script>
 </body>
-
-<!-- auth-register.html  Tue, 07 Jan 2020 03:39:48 GMT -->
 
 </html>
