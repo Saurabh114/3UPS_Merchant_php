@@ -49,56 +49,54 @@ if (isset($_SESSION['merchant_id'])) {
                             <div class="card-header">
                                 <ul class="nav nav-pills" id="myTab3" role="tablist">
                                     <li class="nav-item"><a class="nav-link active" id="profile-tab3" data-toggle="tab" href="#profile3" role="tab" aria-controls="profile" aria-selected="false">Login With OTP</a></li>
-                                    <li class="nav-item"><a class="nav-link" id="home-tab3" data-toggle="tab" href="#home3" role="tab" aria-controls="home" aria-selected="true">Login With Password</a></li>
+                                    <li class="nav-item" style="margin-left: 5px;"><a class="nav-link" id="home-tab3" data-toggle="tab" href="#home3" role="tab" aria-controls="home" aria-selected="true">Login With Password</a></li>
                                 </ul>
                             </div>
                             <div class="card-body">
                                 <div class="tab-content" id="myTabContent2">
                                     <div class="tab-pane fade " id="home3" role="tabpanel" aria-labelledby="home-tab3">
-                                     
-                                            <form method="POST" class="needs-validation" novalidate="" id="login">
-                                                <div class="form-group">
-                                                    <label for="email">Email</label>
-                                                    <input id="email" type="email" class="form-control" name="email" tabindex="1" required autofocus>
+                                        <form method="POST" class="needs-validation" novalidate="" id="login">
+                                            <div class="form-group">
+                                                <label for="email">Email</label>
+                                                <input id="email" type="email" class="form-control" name="email" tabindex="1" required autofocus>
+                                                <div class="invalid-feedback">
+                                                    Please fill in your email
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="d-block">
+                                                    <label for="password" class="control-label">Password</label>
+                                                    <div class="float-right">
+                                                        <a href="forgot-password.php" class="text-small">
+                                                            Forgot Password?
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div class="input-group">
+                                                    <input id="myPassword" type="password" class="form-control phone-number" name="password" tabindex="2" required>
                                                     <div class="invalid-feedback">
-                                                        Please fill in your email
+                                                        Please fill in your password
                                                     </div>
                                                 </div>
-                                                <div class="form-group">
-                                                    <div class="d-block">
-                                                        <label for="password" class="control-label">Password</label>
-                                                        <div class="float-right">
-                                                            <a href="forgot-password.php" class="text-small">
-                                                                Forgot Password?
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="input-group">
-                                                        <input id="myPassword" type="password" class="form-control phone-number" name="password" tabindex="2" required>
-                                                        <div class="invalid-feedback">
-                                                            Please fill in your password
-                                                        </div>
-                                                    </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" name="remember" class="custom-control-input" tabindex="3" id="remember-me" onclick="myFunction()">
+                                                    <label class="custom-control-label" for="remember-me">Show Password</label>
                                                 </div>
-                                                <div class="form-group">
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" name="remember" class="custom-control-input" tabindex="3" id="remember-me" onclick="myFunction()">
-                                                        <label class="custom-control-label" for="remember-me">Show Password</label>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
-                                                        Login
-                                                    </button>
-                                                </div>
-                                            </form>
+                                            </div>
+                                            <div class="form-group">
+                                                <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
+                                                    Login
+                                                </button>
+                                            </div>
+                                        </form>
                                     </div>
                                     <div class="tab-pane fade show active" id="profile3" role="tabpanel" aria-labelledby="profile-tab3">
                                         <form method="POST" action="#" class="needs-validation" novalidate="">
                                             <div class="form-group">
                                                 <label for="email">Email / Phone No</label>
                                                 <div class="input-group">
-
                                                     <input id="user_input" type="email" class="form-control" name="email" tabindex="1" required autofocus placeholder="Enter Email or Phone">
                                                     <div class="input-group-prepend">
                                                         <button type="button" onclick="getOTP()" class="input-group-text btn btn-outline-primary">
@@ -113,6 +111,7 @@ if (isset($_SESSION['merchant_id'])) {
                                                 <div class="d-block">
                                                     <label for="password" class="control-label">OTP</label>
                                                 </div>
+
                                                 <div class="input-group">
                                                     <input id="otp" type="text" class="form-control phone-number" name="password" minlength="6" maxlength="6" pattern="[0-9]{6}" tabindex="2" required placeholder="Enter OTP">
                                                     <div class="invalid-feedback">
@@ -165,7 +164,44 @@ if (isset($_SESSION['merchant_id'])) {
 
     <!-- Page Specific JS File -->
     <script>
-       
+        // verify and login with otp
+
+        function LoginOTP() {
+            var user_otp = jQuery('#otp').val();
+            var request = true;
+            var is_error = "";
+            if (user_res == "") {
+                swal({
+                    title: "Please enter valid details",
+                    icon: "warning",
+                });
+                // alert("enter data")
+            } else {
+                const verify_otp = true;
+                jQuery.ajax({
+                    url: './backend/script.php',
+                    type: 'POST',
+                    data: 'user_otp=' + user_otp + '&verify_otp=' + verify_otp,
+                    success: function(result) {
+
+                        //   alert(result)
+                        if (result === "true") {
+                            swal({
+                                title: "OTP has been sent to " + user_res,
+                                icon: "success",
+                            })
+                        } else {
+                            swal({
+                                title: "Invalid datails",
+                                icon: "warning",
+                            })
+                        }
+
+                    }
+
+                });
+            }
+        }
 
 
         // get OTP
@@ -226,12 +262,25 @@ if (isset($_SESSION['merchant_id'])) {
                 },
                 success: function(data) {
                     console.log(data);
-                    swal({
-                        title: "Login successfull",
-                        icon: "success",
-                    }).then(function() {
-                        window.location.href = "./index.php";
-                    });
+                    if (data === "true") {
+
+                        swal({
+                            title: "Login successfull",
+                            icon: "success",
+                        }).then(function() {
+                            window.location.href = "./index.php";
+                        });
+                    } else {
+                        swal({
+                            title: "Invalid details",
+                            icon: "warning",
+                        }).then(function() {
+                            window.location.href = "./login.php";
+                        });
+                    }
+
+
+
                 },
 
                 error: function(response) {
