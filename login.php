@@ -168,6 +168,7 @@ if (isset($_SESSION['merchant_id'])) {
 
         function LoginOTP() {
         var user_otp = jQuery('#otp').val();
+        var user_res = jQuery('#user_input').val();
         var request = true;
         var is_error = "";
         if (user_res == "") {
@@ -178,10 +179,11 @@ if (isset($_SESSION['merchant_id'])) {
         // alert("enter data")
     } else {
         const verify_otp=true;
+        const fcm = "qwertyuiop"
         jQuery.ajax({
             url: './backend/script.php',
             type: 'POST',
-            data: 'user_otp=' + user_otp + '&verify_otp='+verify_otp,
+            data: 'user_otp=' + user_otp + '&user_input=' + user_res + '&verify_otp='+verify_otp+'&fcm_token='+fcm,
           success: function(result) {
               
             //   alert(result)
