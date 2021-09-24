@@ -48,7 +48,7 @@ else if(isset($_GET['type']) == "logout"){
   
   session_start();
   
-$curl = curl_init();
+$ch = curl_init();
 curl_setopt($ch, CURLOPT_HEADER, 0);
   session_destroy();
   header("Location: ../login.php");

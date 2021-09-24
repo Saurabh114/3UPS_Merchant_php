@@ -55,50 +55,52 @@ if (isset($_SESSION['merchant_id'])) {
                             <div class="card-body">
                                 <div class="tab-content" id="myTabContent2">
                                     <div class="tab-pane fade " id="home3" role="tabpanel" aria-labelledby="home-tab3">
-                                        <form method="POST" class="needs-validation" novalidate="" id="login">
-                                            <div class="form-group">
-                                                <label for="email">Email</label>
-                                                <input id="email" type="email" class="form-control" name="email" tabindex="1" required autofocus>
-                                                <div class="invalid-feedback">
-                                                    Please fill in your email
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="d-block">
-                                                    <label for="password" class="control-label">Password</label>
-                                                    <div class="float-right">
-                                                        <a href="forgot-password.php" class="text-small">
-                                                            Forgot Password?
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                                <div class="input-group">
-                                                    <input id="myPassword" type="password" class="form-control phone-number" name="password" tabindex="2" required>
+                                     
+                                            <form method="POST" class="needs-validation" novalidate="" id="login">
+                                                <div class="form-group">
+                                                    <label for="email">Email</label>
+                                                    <input id="email" type="email" class="form-control" name="email" tabindex="1" required autofocus>
                                                     <div class="invalid-feedback">
-                                                        Please fill in your password
+                                                        Please fill in your email
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" name="remember" class="custom-control-input" tabindex="3" id="remember-me" onclick="myFunction()">
-                                                    <label class="custom-control-label" for="remember-me">Show Password</label>
+                                                <div class="form-group">
+                                                    <div class="d-block">
+                                                        <label for="password" class="control-label">Password</label>
+                                                        <div class="float-right">
+                                                            <a href="forgot-password.php" class="text-small">
+                                                                Forgot Password?
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="input-group">
+                                                        <input id="myPassword" type="password" class="form-control phone-number" name="password" tabindex="2" required>
+                                                        <div class="invalid-feedback">
+                                                            Please fill in your password
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
-                                                    Login
-                                                </button>
-                                            </div>
-                                        </form>
+                                                <div class="form-group">
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" name="remember" class="custom-control-input" tabindex="3" id="remember-me" onclick="myFunction()">
+                                                        <label class="custom-control-label" for="remember-me">Show Password</label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
+                                                        Login
+                                                    </button>
+                                                </div>
+                                            </form>
                                     </div>
                                     <div class="tab-pane fade show active" id="profile3" role="tabpanel" aria-labelledby="profile-tab3">
                                         <form method="POST" action="#" class="needs-validation" novalidate="">
                                             <div class="form-group">
                                                 <label for="email">Email / Phone No</label>
                                                 <div class="input-group">
-                                                <input id="user_input" type="email" class="form-control" name="email" tabindex="1" required autofocus placeholder="Enter Email or Phone">
-                                                    <div  class="input-group-prepend">
+
+                                                    <input id="user_input" type="email" class="form-control" name="email" tabindex="1" required autofocus placeholder="Enter Email or Phone">
+                                                    <div class="input-group-prepend">
                                                         <button type="button" onclick="getOTP()" class="input-group-text btn btn-outline-primary">
                                                             Send OTP</button>
                                                     </div>
@@ -158,14 +160,15 @@ if (isset($_SESSION['merchant_id'])) {
     <script src="js/CodiePie.js"></script>
 
     <!-- JS Libraies -->
-    
-  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
- 
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
     <!-- Page Specific JS File -->
     <script>
+       
 
-        // verify and login with otp
 
+<<<<<<< HEAD
         function LoginOTP() {
         var user_otp = jQuery('#otp').val();
         var user_res = jQuery('#user_input').val();
@@ -194,58 +197,46 @@ if (isset($_SESSION['merchant_id'])) {
             })
               }
               else {
-                swal({
-                    title: "Invalid datails",
-                    icon: "warning",
-            })
-              }  
-              
-        }
-        
-    });
-}
-}
-
-
+=======
         // get OTP
 
-    function getOTP() {
-        var user_res = jQuery('#user_input').val();
-        var request = true;
-        var is_error = "";
-        if (user_res == "") {
-            swal({
-          title: "Please enter valid details",
-          icon: "warning",
-        });
-        // alert("enter data")
-    } else {
-        const otp=true;
-        jQuery.ajax({
-            url: './backend/script.php',
-            type: 'POST',
-            data: 'user=' + user_res + '&type_otp='+otp,
-          success: function(result) {
-              
-            //   alert(result)
-              if(result === "true"){
+        function getOTP() {
+            var user_res = jQuery('#user_input').val();
+            var request = true;
+            var is_error = "";
+            if (user_res == "") {
+>>>>>>> 2c136e22efdf5190c83254d7ae023b404532249b
                 swal({
-                    title: "OTP has been sent to "+user_res,
-                    icon: "success",
-            })
-              }
-              else {
-                swal({
-                    title: "Invalid datails",
+                    title: "Please enter valid details",
                     icon: "warning",
-            })
-              }  
-              
+                });
+                // alert("enter data")
+            } else {
+                const otp = true;
+                jQuery.ajax({
+                    url: './backend/script.php',
+                    type: 'POST',
+                    data: 'user=' + user_res + '&type_otp=' + otp,
+                    success: function(result) {
+
+                        //   alert(result)
+                        if (result === "true") {
+                            swal({
+                                title: "OTP has been sent to " + user_res,
+                                icon: "success",
+                            })
+                        } else {
+                            swal({
+                                title: "Invalid datails",
+                                icon: "warning",
+                            })
+                        }
+
+                    }
+
+                });
+            }
         }
-        
-    });
-}
-}
 
 
 // Login with password
@@ -293,14 +284,47 @@ $('#login').on('submit', function(e) {
         console.log(response);
         }
       });
+        // Login with password
 
-      return false;
+        $('#login').on('submit', function(e) {
+            const data = "";
+            e.preventDefault();
 
-    });
+            // loader();
+            $.ajax({
+                url: './backend/script.php',
+                type: 'POST',
+                // dataType: 'json',
+                data: {
+                    type: "login",
+                    mail: $('#email').val(),
+                    pass: $('#myPassword').val()
+                },
+                success: function(data) {
+                    console.log(data);
+                    swal({
+                        title: "Login successfull",
+                        icon: "success",
+                    }).then(function() {
+                        window.location.href = "./index.php";
+                    });
+                },
+
+                error: function(response) {
+                    console.log("Error")
+                    console.log(response);
+                }
+            });
+
+
+            return false;
+
+        });
     </script>
     <!-- Template JS File -->
     <!-- <script src="./js/connections/login.js"></script> -->
     <script src="js/scripts.js"></script>
     <script src="js/custom.js"></script>
 </body>
+
 </html>
