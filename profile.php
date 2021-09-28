@@ -18,7 +18,30 @@
 
 
     <?php include('includes/header.php') ?>
+<?php 
 
+$url = "https://3-upstesting.site/delta_api/index.php/web/Login/get_merchant";
+
+$curl = curl_init($url);
+curl_setopt($curl, CURLOPT_URL, $url);
+curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+
+$headers = array(
+   "Accept: application/json",
+   "Authorization1:".$token
+);
+
+curl_setopt($curl, CURLOPT_HTTPHEADER, $headers); //for debug only!
+curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
+curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+
+$resp = curl_exec($curl);
+$resp = json_decode($resp);
+curl_close($curl);
+// print_r($resp);
+$merchant_data = array();
+$merchant_data = $resp->data[0];
+?>
 
     <!-- Start app main Content -->
     <div class="main-content">
@@ -31,20 +54,20 @@
                 </div>
             </div>
             <div class="section-body">
-                <h2 class="section-title">Hi, Merchant!</h2>
-                <p class="section-lead">Dominos</p>
+                <!-- <h2 class="section-title" style="visibility: hidden;">Hi,<?php //echo $merchant_data->merchant_name; ?></h2> -->
+                <!-- <p class="section-lead">Dominos</p> -->
 
                 <div class="row mt-sm-4">
                     <div class="col-12 col-md-12 col-lg-8">
                         <div class="card profile-widget">
                             <div class="profile-widget-header text-center">
-                                <img alt="image" src="assets/img/avatar/avatar-1.png" class="rounded-circle profile-widget-picture">
+                                <img alt="image" src="<?php echo $merchant_data->merchant_image_url; ?>" class="rounded-circle profile-widget-picture">
                                 <img alt="image" src="assets/img/logo.png" class="profile-widget-picture">
                             </div>
                             <div class="profile-widget-description row">
                                 <div class="col-lg-8">
                                     <h5>Business Address:</h5>
-                                    <p>Plot No. 29, MadhuMalti Nivas, Omkareshrar Nagar, Vrundavan Nagar Road, Malkapur</p>
+                                    <p><?php echo $merchant_data->merchant_shop_address; ?></p>
                                 </div>
                                 <div class="col-lg-4">
                                     <h5>Airport:</h5>
@@ -63,13 +86,13 @@
                                     <div class="row">
                                         <div class="form-group col-md-4 col-12">
                                             <label>Full Name</label>
-                                            <input type="text" class="form-control" value="" required="">
+                                            <input type="text" class="form-control" value="<?php echo $merchant_data->merchant_name; ?>" required="">
                                             <div class="invalid-feedback">Please fill in the Full Name</div>
                                         </div>
                                         <div class="form-group col-md-4 col-12">
                                             <label for="email">Email</label>
                                             <div class="input-group">
-                                                <input id="email" type="email" class="form-control" name="email" tabindex="1" required autofocus>
+                                                <input id="email" type="email" class="form-control" name="email" tabindex="1" value="<?php echo $merchant_data->merchant_email; ?>" required autofocus>
                                                 <div class="input-group-prepend">
                                                     <div class="input-group-text btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                                         Edit
@@ -83,7 +106,7 @@
                                         <div class="form-group col-md-4 col-12">
                                             <label for="email">Phone No</label>
                                             <div class="input-group">
-                                                <input id="phone_number" type="tel" class="form-control" name="phone" minlength="10" maxlength="10" pattern="[0-9]{10}" required autofocus>
+                                                <input id="phone_number" type="tel" class="form-control" name="phone" minlength="10" value="<?php echo $merchant_data->merchant_user_contact_number; ?>" maxlength="10" pattern="[0-9]{10}" required autofocus>
                                                 <div class="input-group-prepend">
                                                     <div class="input-group-text btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
                                                         Edit
@@ -96,7 +119,7 @@
                                         </div>
                                         <div class="form-group col-md-4 col-12">
                                             <label>Business Name</label>
-                                            <input type="text" class="form-control" value="" required="">
+                                            <input type="text" class="form-control" value="<?php echo $merchant_data->merchant_shop_name; ?>" required="">
                                             <div class="invalid-feedback">Please fill in the Business Name</div>
                                         </div>
                                         <div class="form-group col-lg-4 col-md-4">
@@ -126,16 +149,16 @@
                                             <input type="text" class="form-control" minlength="12" maxlength="12" pattern="[0-9]{12}" required>
                                         </div>
                                         <div class="form-group col-lg-4 col-md-4">
-                                            <label>Pan Card</label>
-                                            <input type="text" class="form-control" minlength="10" maxlength="10" pattern="[0-9]{10}" required>
+                                            <label>SGST Number</label>
+                                            <input type="text" class="form-control" minlength="10" value="<?php echo $merchant_data->merchant_SGST; ?>" maxlength="10" pattern="[0-9]{10}" required>
                                         </div>
                                         <div class="form-group col-lg-4 col-md-4">
-                                            <label>GST Number</label>
-                                            <input type="text" class="form-control" required>
+                                            <label>CGST Number</label>
+                                            <input type="text" value="<?php echo $merchant_data->merchant_CGST; ?>" class="form-control" required>
                                         </div>
                                         <div class="form-group col-lg-4 col-md-4">
                                             <label>Business Description</label>
-                                            <textarea class="form-control"></textarea>
+                                            <input class="form-control" value="<?php echo $merchant_data->merchant_shop_desc; ?>" ></input>
                                         </div>
                                         <div class="form-group col-lg-4 col-md-4">
                                             <label>Opening Time</label>
@@ -145,7 +168,7 @@
                                                         <i class="fas fa-clock"></i>
                                                     </div>
                                                 </div>
-                                                <input type="text" class="form-control timepicker">
+                                                <input type="text" value="<?php echo $merchant_data->merchant_shop_opening_timeing; ?>" class="form-control timepicker">
                                             </div>
                                         </div>
                                         <div class="form-group col-lg-4 col-md-4">
@@ -156,7 +179,7 @@
                                                         <i class="fas fa-clock"></i>
                                                     </div>
                                                 </div>
-                                                <input type="text" class="form-control timepicker">
+                                                <input type="text" value="<?php echo $merchant_data->merchant_shop_close_timeing; ?>" class="form-control timepicker">
                                             </div>
                                         </div>
                                         <div class="form-group col-lg-4 col-md-4">
