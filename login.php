@@ -204,44 +204,12 @@ if (isset($_SESSION['merchant_id'])) {
         }
 
 
-<<<<<<< HEAD
-        function LoginOTP() {
-        var user_otp = jQuery('#otp').val();
-        var user_res = jQuery('#user_input').val();
-        var request = true;
-        var is_error = "";
-        if (user_res == "") {
-            swal({
-          title: "Please enter valid details",
-          icon: "warning",
-        });
-        // alert("enter data")
-    } else {
-        const verify_otp=true;
-        const fcm = "qwertyuiop"
-        jQuery.ajax({
-            url: './backend/script.php',
-            type: 'POST',
-            data: 'user_otp=' + user_otp + '&user_input=' + user_res + '&verify_otp='+verify_otp+'&fcm_token='+fcm,
-          success: function(result) {
-              
-            //   alert(result)
-              if(result === "true"){
-                swal({
-                    title: "OTP has been sent to "+user_res,
-                    icon: "success",
-            })
-              }
-              else {
-=======
-        // get OTP
 
         function getOTP() {
             var user_res = jQuery('#user_input').val();
             var request = true;
             var is_error = "";
             if (user_res == "") {
->>>>>>> 2c136e22efdf5190c83254d7ae023b404532249b
                 swal({
                     title: "Please enter valid details",
                     icon: "warning",
